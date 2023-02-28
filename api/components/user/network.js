@@ -4,7 +4,62 @@ const controller = require("./index");
 const router = express.Router();
 
 //Routes
+/**
+ * @swagger
+ * /api/user:
+ *   get:
+ *     summary: Retrieve a list of users.
+ *     description: Retrieve a list of users.
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       name:
+ *                         type: string
+ */
+
 router.get("/", list);
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   get:
+ *     summary: Retrieve a single JSONPlaceholder user.
+ *     description: Retrieve a single JSONPlaceholder user.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: A single user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                       id:
+ *                         type: string
+ *                       name:
+ *                         type: string
+ */
+
 router.get("/:id", get);
 router.post("/", upsert);
 router.put("/", upsert);
@@ -36,7 +91,7 @@ function upsert(req, res) {
   controller
     .upsert(req.body)
     .then((user) => {
-      response.success(req, res, user, 200);
+      response.success(req, res, user, 201);
     })
     .catch((err) => {
       response.error(req, res, err.message, 500);
