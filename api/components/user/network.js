@@ -10,6 +10,8 @@ const router = express.Router();
  *   get:
  *     summary: Retrieve a list of users.
  *     description: Retrieve a list of users.
+ *     tags:
+ *      - User
  *     responses:
  *       200:
  *         description: A list of users.
@@ -36,6 +38,8 @@ router.get("/", list);
  *   get:
  *     summary: Retrieve a single JSONPlaceholder user.
  *     description: Retrieve a single JSONPlaceholder user.
+ *     tags:
+ *      - User
  *     parameters:
  *       - in: path
  *         name: id
@@ -61,7 +65,47 @@ router.get("/", list);
  */
 
 router.get("/:id", get);
+
+/**
+ * @swagger
+ * /api/user:
+ *  post:
+ *    summary: Create a user.
+ *    description: Create a user.
+ *    tags:
+ *      - User
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              username:
+ *                type: string
+ *              password:
+ *                type: string
+ *
+ *    responses:
+ *      201:
+ *        description: The user was successfully created.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: string
+ *                name:
+ *                  type: string
+ *                username:
+ *                  type: string
+ *
+ *
+ */
 router.post("/", upsert);
+
 router.put("/", upsert);
 
 //Internal functions

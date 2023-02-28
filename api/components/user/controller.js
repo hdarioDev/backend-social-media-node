@@ -20,9 +20,10 @@ module.exports = function (injectedStore) {
   async function upsert(body) {
     const user = {
       name: body.name,
-      name: body.username,
+      username: body.username,
     };
     user.id = body.id || nanoid();
+    console.log("🚀 ~ file: controller.js:25 ~ upsert ~ user:", user);
 
     if (body.password || body.username) {
       user.username = body.username;
