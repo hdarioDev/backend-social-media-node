@@ -10,11 +10,15 @@ function sign(data) {
 const check = {
   own: function (req, owner) {
     const decoded = decodeHeader(req);
-    console.log("decoded", decoded);
+    console.log("🚀 ~ file: index.js:22 ~ owner:", owner);
+    console.log("🚀 ~ file: index.js:13 ~ decoded:", decoded);
     //Check if the id is the same
     if (decoded.id !== owner) {
       throw new Error("You can't do this");
     }
+  },
+  logged: function (req, owner) {
+    const decoded = decodeHeader(req);
   },
 };
 

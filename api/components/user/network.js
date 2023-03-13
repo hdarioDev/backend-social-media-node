@@ -109,6 +109,8 @@ router.post("/", upsert);
 
 router.put("/", secure("update"), upsert);
 
+router.post("/follow/:id", secure("follow"), follow);
+
 //Internal functions
 function list(req, res) {
   controller
@@ -137,6 +139,17 @@ function upsert(req, res) {
     .upsert(req.body)
     .then((user) => {
       response.success(req, res, user, 201);
+    })
+    .catch((err) => {
+      response.error(req, res, err.message, 500);
+    });
+}
+
+function follow(req, res, next) {
+  controller
+    .follow(req.user.id, req.params.id)
+    .then((data) => {
+      response.success(req, res, data, 201);
     })
     .catch((err) => {
       response.error(req, res, err.message, 500);
