@@ -17,6 +17,7 @@
     "mysql": "^2.18.1",
     "nanoid": "3.0.0",
     "nodemon": "^2.0.20",
+    "request": "^2.88.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.1"
   },
