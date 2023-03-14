@@ -111,6 +111,8 @@ router.put("/", secure("update"), upsert);
 
 router.post("/follow/:id", secure("follow"), follow);
 
+router.get("/:id/following", following);
+
 //Internal functions
 function list(req, res) {
   controller
@@ -151,9 +153,16 @@ function follow(req, res, next) {
     .then((data) => {
       response.success(req, res, data, 201);
     })
-    .catch((err) => {
-      response.error(req, res, err.message, 500);
-    });
+    .catch(next);
+}
+
+function following(req, res, next) {
+  return controller
+    .following(req.params.id)
+    .then((data) => {
+      response.success(req, res, data, 200);
+    })
+    .catch(next);
 }
 
 module.exports = router;
