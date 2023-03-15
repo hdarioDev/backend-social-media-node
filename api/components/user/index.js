@@ -1,4 +1,5 @@
 const ctrl = require("./controller");
+const config = require("../../../config");
 // const store = require("../../../store/mysql");
 // const store = require("../../../store/remote-mysql");
 
